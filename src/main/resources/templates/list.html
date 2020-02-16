@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>User List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/static/newstyle.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/static/newbootstrap.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+
+<form th:action="@{/logout}" method="POST">
+    <input type="submit" value="Logout"/>
+</form>
+
+
+<div class="panel panel-info">
+    <a th:href="@{/addUser(userId = ${#lists.size(userList)})}">Add User</a>
+
+    <div class="panel-body" align="center" th:marginwidth="auto">
+        <h1>USER LIST</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            <th:url var="updateLink" value="/user-form">
+                <th:param name="userId" value="${user.id}"/>
+            </th:url>
+
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.id}">nothing</td>
+                <td th:text="${user.name}">nothing</td>
+                <td th:text="${user.password}">nothing</td>
+                <td th:text="${user.roles}">nothing</td>
+                <td><a th:href="@{update(userId = ${user.id})}">Update</a>
+                    | <a th:href="@{/delete(userId = ${user.id})}"
+                         onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false">Delete</a></td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

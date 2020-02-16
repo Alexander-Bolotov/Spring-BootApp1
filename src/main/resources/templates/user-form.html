@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sf="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Getting Started: Handing Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1 align="center">Add/Update form</h1>
+<form action="#" th:action="@{/saveUser}" th:object="${user}" method="post" align="center">
+    <p>Id: <input type="text" th:field="*{id}" th:readonly="*{id}"/></p>
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p>Password: <input type="text" th:field="*{password}"/></p>
+
+    <select  id="roles" multiple="multiple" name="roles">
+        <option th:each="role : ${roles}"
+                th:value="${role.id}"
+                th:text="${role.role}"></option>
+    </select>
+<!--    <p>Roles: <input type="text" th:field="*{roles}"/></p>-->
+    <p><input type="submit" value="Submit"/>
+</form>
+</body>
+</html>
